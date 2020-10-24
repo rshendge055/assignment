@@ -17,11 +17,46 @@ from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
 
 
-
-
 class CustomPagination(PageNumberPagination):
     page_size = 1
 
+
+# Viewsets
+# NOTE: I done with class based views first. Then I optimize with viewsets.
+
+class ChemicalViewSet(viewsets.ModelViewSet):
+    """
+        viewset for chemical
+    """
+
+    queryset = Chemical.objects.all()
+    serializer_class = ChemicalSerializer
+    pagination_class = LimitOffsetPagination
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
+
+
+class CommodityViewSet(viewsets.ModelViewSet):
+    """
+    viewset for commodity
+    """
+    queryset = Commodity.objects.all()
+    serializer_class = CommoditySerializer
+    pagination_class = LimitOffsetPagination
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
+
+
+class ChemicalCompositionViewSet(viewsets.ModelViewSet):
+    """
+    viewset for chemical composition
+    """
+    queryset = ChemicalComposition.objects.all()
+    serializer_class = ChemicalCompositionSerializer
+    # pagination_class = CustomPagination
+    pagination_class = LimitOffsetPagination
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 # Class based views
 
@@ -118,41 +153,3 @@ class CustomPagination(PageNumberPagination):
 #         commodity = self.get_object(pk)
 #         commodity.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# Viewsets
-# NOTE: I done with class based views first. Then I optimize with viewsets.
-
-class ChemicalViewSet(viewsets.ModelViewSet):
-    """
-        viewset for chemical
-    """
-
-    queryset = Chemical.objects.all()
-    serializer_class = ChemicalSerializer
-    pagination_class = LimitOffsetPagination
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated, DjangoModelPermissions]
-
-
-class CommodityViewSet(viewsets.ModelViewSet):
-    """
-    viewset for commodity
-    """
-    queryset = Commodity.objects.all()
-    serializer_class = CommoditySerializer
-    pagination_class = LimitOffsetPagination
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated, DjangoModelPermissions]
-
-
-class ChemicalCompositionViewSet(viewsets.ModelViewSet):
-    """
-    viewset for chemical composition
-    """
-    queryset = ChemicalComposition.objects.all()
-    serializer_class = ChemicalCompositionSerializer
-    # pagination_class = CustomPagination
-    pagination_class = LimitOffsetPagination
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated, DjangoModelPermissions]

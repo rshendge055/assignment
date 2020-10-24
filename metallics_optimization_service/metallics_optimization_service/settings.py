@@ -97,8 +97,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'NAME': 'metallics_optimization',
-        'USER': 'rahul',
-        'PASSWORD': 'root'
+        'USER': '<username>',
+        'PASSWORD': '<password>'
     }
 }
 

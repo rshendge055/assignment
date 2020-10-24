@@ -25,6 +25,19 @@ Install requirements.txt
 ```bash
 pip install -r /path/to/requirements.txt
 ```
+Set DB name, username and password in setting.py file
+```python
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'NAME': 'metallics_optimization',
+        'USER': '<username>',
+        'PASSWORD': '<password>'
+    }
+}
+```
 Now sync your database for the first time
 ```bash
 python manage.py migrate
